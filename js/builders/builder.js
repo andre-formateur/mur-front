@@ -1,3 +1,5 @@
+import { formatDate } from "../utils/divers.js";
+
 function buildElement(tag, className = null) {
     const element = document.createElement(tag);
     className !== null ? element.classList.add(className) : null;
@@ -20,7 +22,7 @@ export function buildPost(message, currentUser) {
     // .post__date
     const date = buildElement("span", "post__date");
     const updatedDate = message.updatedAt !== null ? " · modifié" : "";
-    date.textContent = message.createdAt + updatedDate;
+    date.textContent = formatDate(message.createdAt) + updatedDate;
 
     // .post__meta
     const meta = buildElement("div", "post__meta");
@@ -46,12 +48,12 @@ export function buildPost(message, currentUser) {
 
     if(currentUser.id === message.author.id) {
         // a.post__button
-        const updateButton = buildElement("a", "post_button");
+        const updateButton = buildElement("a", "post__button");
         updateButton.textContent = "Modifier";
         updateButton.setAttribute("href", `modifier.html?id=${message.id}`)
 
         // button.post__button
-        const removeButton = buildElement("button", "post_button");
+        const removeButton = buildElement("button", "post__button");
         removeButton.classList.add("post__button--danger")
         removeButton.textContent = "Supprimer";
 
