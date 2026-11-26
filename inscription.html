@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription — Le Mur</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="page auth">
+    <p class="logo">🧱 Le Mur</p>
+
+    <div class="card">
+      <form id="register-form">
+        <h1 class="form__title">Créer un compte</h1>
+
+        <label>
+          Pseudo
+          <input type="text" id="username" minlength="2" maxlength="20" required>
+        </label>
+
+        <label>
+          E-mail
+          <input type="email" id="email" autocomplete="email" required>
+        </label>
+
+        <label>
+          Mot de passe (6 caractères minimum)
+          <input type="password" id="password" autocomplete="new-password" minlength="6" required>
+        </label>
+
+        <!-- Message d'erreur : invisible tant qu'il est vide -->
+        <p id="error" class="error"></p>
+
+        <button type="submit" class="btn">Créer mon compte</button>
+      </form>
+    </div>
+
+    <p class="link">Déjà inscrit ? <a href="index.html">Se connecter</a></p>
+  </main>
+
+  <script type="module" src="js/inscription.js"></script>
+</body>
+</html>

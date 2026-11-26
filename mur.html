@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Mur</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <div>
+        <p class="header__title">🧱 Le Mur</p>
+        <!-- Le pseudo de l'utilisateur connecté s'écrit dans #username -->
+        <p class="header__user">Connecté : <strong id="username"></strong></p>
+      </div>
+      <button type="button" id="logout-button" class="btn btn--ghost btn--small">Déconnexion</button>
+    </div>
+  </header>
+
+  <main class="page wall">
+
+    <!-- ===== Nouveau message ===== -->
+    <section class="card">
+      <form id="message-form">
+        <h1 class="form__title">Nouveau message</h1>
+
+        <label>
+          Votre message (280 caractères maximum)
+          <textarea id="content" rows="3" maxlength="280" placeholder="Écrivez quelque chose…" required></textarea>
+        </label>
+
+        <!-- Message d'erreur : invisible tant qu'il est vide -->
+        <p id="message-error" class="error"></p>
+
+        <button type="submit" class="btn">Publier</button>
+      </form>
+    </section>
+
+    <!-- ===== Les messages ===== -->
+    <section class="wall">
+      <h2 class="section-title">Les messages</h2>
+
+      <!-- Erreur générale du mur (chargement, suppression…) -->
+      <p id="wall-error" class="error"></p>
+
+      <!-- Les messages sont ajoutés ici en JavaScript -->
+      <ul id="message-list" class="message-list">
+
+        <!-- ================================================================
+             MODÈLE 1 : message d'un autre utilisateur (pas de boutons)
+
+        <li class="post">
+          <div class="post__header">
+            <span class="post__avatar">L</span>
+            <div class="post__meta">
+              <strong>Lucas</strong>
+              <span class="post__date">20 nov. 2026, 09:15</span>
+            </div>
+          </div>
+          <p class="post__content">Bienvenue sur le mur ! Présentez-vous en quelques mots 👋</p>
+        </li>
+
+        ================================================================ -->
+
+        <!-- ================================================================
+             MODÈLE 2 : message de l'utilisateur connecté
+             - classe supplémentaire "post--mine"
+             - lien « Modifier » vers modifier.html?id=<id du message>
+             - bouton « Supprimer »
+             - " · modifié" après la date si le message a été modifié (updatedAt)
+
+        <li class="post post--mine">
+          <div class="post__header">
+            <span class="post__avatar">C</span>
+            <div class="post__meta">
+              <strong>Camille</strong>
+              <span class="post__date">21 nov. 2026, 15:30 · modifié</span>
+            </div>
+          </div>
+          <p class="post__content">Petit conseil : testez vos routes avec REST Client.</p>
+          <div class="post__actions">
+            <a href="modifier.html?id=3" class="post__button">Modifier</a>
+            <button type="button" class="post__button post__button--danger">Supprimer</button>
+          </div>
+        </li>
+
+        ================================================================ -->
+
+        <!-- ================================================================
+             MODÈLE 3 : aucun message sur le mur
+
+        <li class="empty">Aucun message pour le moment. Soyez le premier à écrire !</li>
+
+        ================================================================ -->
+
+      </ul>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/mur.js"></script>
+</body>
+</html>

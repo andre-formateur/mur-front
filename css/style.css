@@ -1,0 +1,323 @@
+/* =========================================================
+   Le Mur — version mobile uniquement
+   ========================================================= */
+
+/* ---------- Variables ---------- */
+:root {
+  --bg: #f3f1ec;
+  --surface: #ffffff;
+  --border: #e2ded5;
+  --text: #22201c;
+  --muted: #6f6a62;
+  --primary: #3b5bdb;
+  --primary-hover: #2f4ac0;
+  --mine: #eef2ff;
+  --danger: #d6336c;
+  --radius: 14px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* Le contenu reste dans une colonne de la largeur d'un téléphone */
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+h1, h2 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ---------- Pages connexion / inscription ---------- */
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.logo {
+  margin: 0 0 1.25rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.link {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ---------- Carte ---------- */
+.card {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Formulaires ---------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form__title {
+  font-size: 1.3rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: var(--primary);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--primary-hover);
+}
+
+.btn--ghost {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--border);
+}
+
+.btn--ghost:hover {
+  background: var(--surface);
+}
+
+.btn--small {
+  min-height: 36px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.875rem;
+}
+
+/* ---------- Message d'erreur ---------- */
+/* Vide = invisible : il suffit d'écrire un texte dedans pour l'afficher */
+.error {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  color: var(--danger);
+  background: #fdecf2;
+  border-left: 4px solid var(--danger);
+  border-radius: 6px;
+}
+
+.error:empty {
+  display: none;
+}
+
+/* ---------- En-tête du mur ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.header__user {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---------- Mur ---------- */
+.wall {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.section-title {
+  font-size: 1.1rem;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Un message */
+.post {
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Un message écrit par l'utilisateur connecté */
+.post--mine {
+  background: var(--mine);
+  border-color: #c5d0fa;
+}
+
+.post__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.post__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+.post__meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.post__date {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.post__content {
+  margin: 0.6rem 0 0;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.post__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.post__button {
+  padding: 0.3rem 0.7rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--primary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.post__button--danger {
+  color: var(--danger);
+}
+
+/* Aucun message */
+.empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- Page de modification ---------- */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.form__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form__actions .btn {
+  flex: 1;
+}

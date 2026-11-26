@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier un message — Le Mur</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="page">
+    <a href="mur.html" class="back-link">← Retour au mur</a>
+
+    <div class="card">
+      <!-- L'id du message à modifier est dans l'URL : modifier.html?id=3 -->
+      <form id="edit-form">
+        <h1 class="form__title">Modifier mon message</h1>
+
+        <label>
+          Votre message (280 caractères maximum)
+          <!-- Le texte actuel du message s'écrit dans ce champ -->
+          <textarea id="content" rows="5" maxlength="280" required></textarea>
+        </label>
+
+        <!-- Message d'erreur : invisible tant qu'il est vide -->
+        <p id="error" class="error"></p>
+
+        <div class="form__actions">
+          <a href="mur.html" class="btn btn--ghost">Annuler</a>
+          <button type="submit" class="btn">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script type="module" src="js/modifier.js"></script>
+</body>
+</html>
