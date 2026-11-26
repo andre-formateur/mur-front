@@ -1,6 +1,22 @@
-import { connectUser } from "../models/authModel.js";
-import { setToken } from "../utils/auth.js";
+import { connectUser, getCurrentUser } from "../models/authModel.js";
+import { getToken, removeToken, setToken, isUserLogged } from "../utils/auth.js";
 import { showError, hideError } from "../utils/error.js";
+
+async function onPageLoad() {
+    const userLogged = isUserLogged();
+
+    if (userLogged) {
+        const dataToken = getToken();
+        try {
+            await getCurrentUser(dataToken);
+            window.location.href = "mur.html";
+        } catch {
+            removeToken();
+        } 
+    }
+}
+
+onPageLoad();
 
 document.querySelector("#login-form").addEventListener("submit", async (event) => {
     event.preventDefault();

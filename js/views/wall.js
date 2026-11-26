@@ -36,6 +36,7 @@ async function onPostDelete(id, item) {
     try {
         await deleteMessage(id, token.token)
         item.remove();
+        addEmptyPostMessage();
     } catch (error) {
         showError("wall-error", error)
     }
@@ -50,6 +51,8 @@ async function displayMessage() {
         const post = buildPost(message, token.user, onPostDelete);
         container.appendChild(post);
     })
+    
+    addEmptyPostMessage();
 }
 
 onPageLoad();
@@ -84,8 +87,29 @@ document.querySelector("#message-form").addEventListener("submit", async (event)
         container.prepend(post);
 
         contentTextarea.value = "";
+        removeEmptyPostMessage();
     } catch (error) {
         showError("message-error", error);
     }
 
 })
+
+
+function removeEmptyPostMessage() {
+    const li = document.querySelectorAll(".empty");
+
+    li.forEach(item => {
+        item.remove();
+    })
+}
+
+function addEmptyPostMessage() {
+    const items = container.querySelectorAll("li");
+
+    if(items.length === 0) {
+        const li = document.createElement("li");
+        li.classList.add("empty");
+        li.textContent = "Aucun message trouvé";
+        container.appendChild(li);
+    }
+}
