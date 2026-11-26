@@ -1,5 +1,5 @@
 import { getCurrentUser, disconnectUser } from "../models/authModel.js";
-import { getAllMessages, createMessage } from "../models/messageModel.js";
+import { getAllMessages, createMessage, deleteMessage } from "../models/messageModel.js";
 import { getToken, removeToken, isUserLogged } from "../utils/auth.js";
 import { buildPost } from "../builders/builder.js";
 import { showError } from "../utils/error.js";
@@ -31,13 +31,23 @@ async function onPageLoad() {
 
 }
 
+async function onPostDelete(id, item) {
+    const token = getToken();
+    try {
+        await deleteMessage(id, token.token)
+        item.remove();
+    } catch (error) {
+        showError("wall-error", error)
+    }
+}
+
 async function displayMessage() {
     const token = getToken();
 
     const messages = await getAllMessages(token.token);
 
     messages.forEach(message => {
-        const post = buildPost(message, token.user);
+        const post = buildPost(message, token.user, onPostDelete);
         container.appendChild(post);
     })
 }
@@ -70,7 +80,7 @@ document.querySelector("#message-form").addEventListener("submit", async (event)
         const message = await createMessage(content, token.token)
 
         // Afficher le message dans le mur
-        const post = buildPost(message, token.user);
+        const post = buildPost(message, token.user, onPostDelete);
         container.prepend(post);
 
         contentTextarea.value = "";

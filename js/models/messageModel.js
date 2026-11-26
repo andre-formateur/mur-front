@@ -24,7 +24,7 @@ export async function getMessageById(id, token) {
             method: "GET",
             headers: { "Authorization": `Bearer ${token}` }
         });
-        
+
         const data = await response.json();
 
         if(!response.ok) {
@@ -96,4 +96,30 @@ export async function updateMessage(id, content, token) {
         throw new Error(apiErrorMessage);
     }
     
+}
+
+export async function deleteMessage(id, token) {
+    try {
+        
+        const response = await fetch(`${baseUrl}/messages/${id}`, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        if(response.status === 403) {
+            throw {error: "Ce n'est pas votre post !"};
+        }
+
+        if(response.status === 404) {
+            throw {error: "Ce post n'existe pas !"};
+        }
+
+    } catch(data) {
+
+        if(data.error) {
+            throw new Error(data.error)
+        }
+
+        throw new Error(apiErrorMessage);
+    }
 }

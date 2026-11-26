@@ -6,7 +6,7 @@ function buildElement(tag, className = null) {
     return element;
 }
 
-export function buildPost(message, currentUser) {
+export function buildPost(message, currentUser, callback) {
 
     // .post
     const post = buildElement("li", "post");
@@ -56,6 +56,7 @@ export function buildPost(message, currentUser) {
         const removeButton = buildElement("button", "post__button");
         removeButton.classList.add("post__button--danger")
         removeButton.textContent = "Supprimer";
+        removeButton.addEventListener("click", () => callback(message.id, post))
 
         // .post__actions
         const actions = buildElement("div", "post__actions");
