@@ -1,18 +1,21 @@
 export function setToken(dataToken) {
     localStorage.setItem("token", dataToken.token);
     localStorage.setItem("tokenExpiration", dataToken.expiresAt);
+    localStorage.setItem("user", JSON.stringify(dataToken.user));
 }
 
 export function getToken() {
     return {
         token: localStorage.getItem("token"),
-        tokenExpiration: localStorage.getItem("tokenExpiration")
+        tokenExpiration: localStorage.getItem("tokenExpiration"),
+        user: JSON.parse(localStorage.getItem("user"))
     }
 }
 
 export function removeToken() {
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpiration");
+    localStorage.removeItem("user");
 }
 
 export function isUserLogged() {

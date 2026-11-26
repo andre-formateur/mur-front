@@ -133,12 +133,6 @@ Chaque user story décrit un besoin de l'utilisateur, puis les **critères d'acc
 - **Mes** messages sont mis en évidence et sont les seuls à avoir les boutons « Modifier » et « Supprimer ».
 - S'il n'y a aucun message, un message l'indique.
 
-**Cas d'erreur**
-
-| Situation | Résultat attendu |
-|---|---|
-| L'API ne répond pas | Un message d'erreur s'affiche sur le mur |
-
 ### US5 — Publier un message
 
 > **En tant qu'**utilisateur, **je veux** poster un message sur le mur **afin de** m'exprimer.
