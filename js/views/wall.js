@@ -1,7 +1,10 @@
 import { getCurrentUser, disconnectUser } from "../models/authModel.js";
-import { getAllMessages } from "../models/messageModel.js";
+import { getAllMessages, createMessage } from "../models/messageModel.js";
 import { getToken, removeToken, isUserLogged } from "../utils/auth.js";
 import { buildPost } from "../builders/builder.js";
+import { showError } from "../utils/error.js";
+
+const container = document.querySelector("#message-list");
 
 async function onPageLoad() {
 
@@ -18,7 +21,7 @@ async function onPageLoad() {
         const username = document.querySelector("#username");
         username.textContent = currentUser.username;
 
-        createMessage();
+        displayMessage();
         
 
     } catch (error) {
@@ -28,11 +31,10 @@ async function onPageLoad() {
 
 }
 
-async function createMessage() {
+async function displayMessage() {
     const token = getToken();
 
     const messages = await getAllMessages(token.token);
-    const container = document.querySelector("#message-list");
 
     messages.forEach(message => {
         const post = buildPost(message, token.user);
@@ -42,6 +44,7 @@ async function createMessage() {
 
 onPageLoad();
 
+// Clique sur le bouton de déconnexion
 document.querySelector("#logout-button").addEventListener("click", async () => {
     const dataToken = getToken();
     removeToken();
@@ -50,4 +53,29 @@ document.querySelector("#logout-button").addEventListener("click", async () => {
     } finally {
         window.location.href = "/"
     }
+})
+
+// Soumission du message
+document.querySelector("#message-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const token = getToken();
+    
+    // On récupère la valeur du contenu
+    const contentTextarea = document.querySelector("#content");
+    const content = contentTextarea.value;
+
+    try {
+        // Créer le message en l'envoyant à l'API
+        const message = await createMessage(content, token.token)
+
+        // Afficher le message dans le mur
+        const post = buildPost(message, token.user);
+        container.prepend(post);
+
+        contentTextarea.value = "";
+    } catch (error) {
+        showError("message-error", error);
+    }
+
 })
