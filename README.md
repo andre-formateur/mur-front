@@ -28,8 +28,6 @@ Conseil : testez chaque route avec REST Client (`api/requests.http`) **avant** d
 | `mur.html` | Le mur : publier, lire, supprimer |
 | `modifier.html?id=…` | Modifier un de ses messages |
 
-Chaque page a déjà son fichier JavaScript relié (`js/index.js`, `js/inscription.js`, `js/mur.js`, `js/modifier.js`). Vous êtes libres d'ajouter d'autres fichiers, par exemple pour regrouper les appels à l'API.
-
 ---
 
 ## Ce qui vous aide
